@@ -1,78 +1,148 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
+
+const questions = [
+  {
+    id: "Q1",
+    question: "What is your favorite color?",
+    answers: [
+      { id: "A1", answer: "Red" },
+      { id: "A2", answer: "Blue" },
+      { id: "A3", answer: "Green" },
+      { id: "A4", answer: "Yellow" },
+    ],
+  },
+  {
+    id: "Q2",
+    question: "What is your favorite form of expression?",
+    answers: [
+      { id: "A1", answer: "Science" },
+      { id: "A2", answer: "Art" },
+      { id: "A3", answer: "Medical" },
+      { id: "A4", answer: "Lecturing" },
+    ],
+  },
+  {
+    id: "Q3",
+    question: "What is your favorite form expression?",
+    answers: [
+      { id: "A1", answer: "Science" },
+      { id: "A2", answer: "Art" },
+      { id: "A3", answer: "Medical" },
+      { id: "A4", answer: "Lecturing" },
+    ],
+  },
+];
+
+const jobProfessions = [
+  { answer: "A1", profession: "Scientist" },
+  { answer: "A2", profession: "Artist" },
+  { answer: "A3", rofession: "Doctor" },
+  { answer: "A4", profession: "Professor" },
+];
 
 const Test = () => {
-  const [jobProfessions, setJobProfessions] = useState([]);
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  const [answers, setAnswers] = useState({});
+  const [selectedProfession, setSelectedProfession] = useState("");
+  const [isFormSubmitted, setIsFormSubmitted] = useState(false);
 
-  const handleFormSubmit = (event) => {
-    event.preventDefault();
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
 
-    const formData = new FormData(event.target);
-    const selectedValues = {};
-    for (let [name, value] of formData.entries()) {
-      if (selectedValues[name]) {
-        selectedValues[name].push(value);
-      } else {
-        selectedValues[name] = [value];
+    const isAllAnswered = Object.keys(answers).length === questions.length;
+    setIsFormSubmitted(isAllAnswered);
+
+    let profession = null;
+
+    if (isAllAnswered) {
+      const selectedAnswerIds = Object.values(answers);
+      const selectedAnswerCounts = selectedAnswerIds.reduce(
+        (counts, answerId) => {
+          counts[answerId] = (counts[answerId] || 0) + 1;
+          return counts;
+        },
+        {}
+      );
+
+      const mostSelectedAnswerId = Object.keys(selectedAnswerCounts).reduce(
+        (a, b) => (selectedAnswerCounts[a] > selectedAnswerCounts[b] ? a : b)
+      );
+      console.log("most selectedAnswer : ", mostSelectedAnswerId);
+
+      profession = jobProfessions.find(
+        (job) => job.answer === mostSelectedAnswerId
+      );
+      console.log(profession);
+      if (profession) {
+        setSelectedProfession(profession.profession);
       }
     }
 
-    let professions = [];
-
-    // Logic for each question based on selected values
-    // Example for Question 1
-    if (selectedValues['question'] && selectedValues['question'].includes('A')) {
-      professions.push('Social Sciences related professions');
+    if (currentQuestionIndex < questions.length - 1) {
+      setCurrentQuestionIndex(currentQuestionIndex + 1);
     }
-    if (selectedValues['question'] && selectedValues['question'].includes('B')) {
-      professions.push('Science and Humanities related professions');
-    }
-    // Add logic for other options in Question 1
-
-    // Continue the logic for each question (2 to 3)
-
-    if (professions.length === 0) {
-      professions.push('Sorry, we couldn\'t determine job professions based on your answers.');
-    }
-
-    setJobProfessions(professions);
   };
 
+  const handleAnswerChange = (questionId, answerId) => {
+    setAnswers((prevAnswers) => ({
+      ...prevAnswers,
+      [questionId]: answerId,
+    }));
+  };
+
+  const currentQuestion = questions[currentQuestionIndex];
+
   return (
-    <div className="bg-white border rounded-lg px-8 py-6 mx-auto my-8 max-w-2xl">
-      <h2 className="text-2xl font-medium mb-4">Major Test</h2>
-      <form onSubmit={handleFormSubmit}>
-        {/* Add HTML structures for each question */}
-        {/* Example for Question 1 */}
-        <div className="mb-4">
-          <label className="block text-gray-700 font-medium mb-2">1. What subjects or fields do you enjoy the most?</label>
-          <div className="flex flex-wrap -mx-2">
-            <div className="px-2 w-1/3">
-              <label htmlFor="A" className="block text-gray-700 font-medium mb-2">
-                <input type="checkbox" id="A" name="question" value="A" className="mr-2" />
-                Social Sciences
+    <div className="mt-10">
+      {!isFormSubmitted && (
+        <form
+          onSubmit={handleFormSubmit}
+          className="max-w-md mx-auto bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
+        >
+          <h1 className="text-2xl font-bold mb-4">
+            {currentQuestion.question}
+          </h1>
+          {currentQuestion.answers.map((answer) => (
+            <div key={answer.id} className="mb-2">
+              <label htmlFor={answer.id} className="flex items-center">
+                <input
+                  type="radio"
+                  id={answer.id}
+                  name="answer"
+                  value={answer.id}
+                  checked={answers[currentQuestion.id] === answer.id}
+                  onChange={() =>
+                    handleAnswerChange(currentQuestion.id, answer.id)
+                  }
+                  className="mr-2 cursor-pointer"
+                />
+                <span>{answer.answer}</span>
               </label>
             </div>
-            {/* Add similar structures for other options in Question 1 */}
-          </div>
-        </div>
-        
-        {/* Add similar structures for Questions 2 and 3 */}
-        {/* ... */}
-
-        <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-          Submit
-        </button>
-      </form>
-
-      {/* Display job professions */}
-      <div className="mt-4">
-        <h3 className="text-lg font-medium mb-2">Potential Job Professions</h3>
-        <ul>
-          {jobProfessions.map((profession, index) => (
-            <li key={index}>{profession}</li>
           ))}
-        </ul>
-      </div>
+          <button
+            type="submit"
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4"
+          >
+            Next
+          </button>
+        </form>
+      )}
+
+      {isFormSubmitted && Object.keys(answers).length === questions.length && (
+        <div className="mt-4">
+          <p className="text-lg font-bold">Recommended Job Profession:</p>
+          <p>{selectedProfession}</p>
+        </div>
+      )}
+
+      {/* For Debugging: Display selected answers */}
+      {/* {isFormSubmitted && (
+        <div className="mt-4">
+          <p>Debug - Selected Answers:</p>
+          <pre>{JSON.stringify(answers, null, 2)}</pre>
+        </div>
+      )} */}
     </div>
   );
 };

@@ -200,28 +200,15 @@ import { useNavigate } from 'react-router-dom';
         <div class="-mx-4 flex flex-wrap justify-between">
           <div class="px-4 my-4 w-full xl:w-1/5">
             <a href="/" class="block w-56 mb-10">
-              <svg version="1.1" viewBox="0 0 3368 512" xmlns="http://www.w3.org/2000/svg">
-                <g fill="none" fill-rule="evenodd">
-                  <g transform="translate(0 -75)">
-                    <g transform="translate(0 75)">
-                      <rect width="512" height="512" rx="128" fill="#3D5AFE"></rect>
-                      <rect x="149" y="176" width="220" height="220" fill="#fff"></rect>
-                      <circle cx="259" cy="156" r="40" fill="#fff"></circle>
-                      <circle cx="369" cy="286" r="40" fill="#2962FF"></circle>
-                    </g>
-                    <text fill="white" font-family="Nunito-Bold, Nunito" font-size="512" font-weight="bold">
-                      <tspan x="654" y="518">Learniverse</tspan>
-                    </text>
-                  </g>
-                </g>
-              </svg>
+            <img className="w-24 h-24 rounded-full" src="https://firebasestorage.googleapis.com/v0/b/learniversebest.appspot.com/o/Screenshot%20(11).png?alt=media&token=179b1999-9f27-4711-8447-450af43ddaeb" alt="" />
+            <h2>Learniverse</h2>
             </a>
             
           </div>
 
           <div class="px-4 my-4 w-full sm:w-auto">
             <div>
-              <h2 class="inline-block text-2xl pb-4 mb-4 border-b-4 border-blue-600">Company</h2>
+              <h2 class="inline-block text-2xl pb-4 mb-4 border-b-4 border-blue-600">Learniverse</h2>
             </div>
             <ul class="leading-8">
               <li><a href="#" class="hover:text-blue-400">About Us</a></li>
@@ -233,7 +220,7 @@ import { useNavigate } from 'react-router-dom';
 
           <div class="px-4 my-4 w-full sm:w-auto">
             <div>
-              <h2 class="inline-block text-2xl pb-4 mb-4 border-b-4 border-blue-600">Company</h2>
+              <h2 class="inline-block text-2xl pb-4 mb-4 border-b-4 border-blue-600">Learniverse</h2>
             </div>
             <ul class="leading-8">
               <li><a href="#" class="hover:text-blue-400">About Us</a></li>

@@ -82,28 +82,6 @@ const [authorList, setAuthorList] = useState([]);
       <div className="text-center p-10">
         <h1 className="font-bold text-4xl mb-4">Selected Internships Position</h1>
       </div>
-
-      <div className="flex flex-wrap items-start justify-center p-5 py-10">
-        <a
-          className=" relative px-3 py-1 m-2 rounded-md shadow-sm sm:py-2 sm:text-base ring ring-transparent group md:px-4 hover:ring hover:ring-opacity-50 focus:ring-opacity-50 hover:ring-violet-600 text-gray-900 bg-gray-200 dark:bg-gray-400 dark:text-gray-200 "
-          href="https://tailwindflex.com/tag/card"
-        >
-          <span className="text-sm">latest</span>
-        </a>
-        <a
-          className=" relative px-3 py-1 m-2 rounded-md shadow-sm sm:py-2 sm:text-base ring ring-transparent group md:px-4 hover:ring hover:ring-opacity-50 focus:ring-opacity-50 hover:ring-violet-600 text-gray-900 bg-gray-200 dark:bg-gray-400 dark:text-gray-200 "
-          href="https://tailwindflex.com/tag/call-to-action"
-        >
-          <span className="text-sm">Popular</span>
-        </a>
-        <a
-          className=" relative px-3 py-1 m-2 rounded-md shadow-sm sm:py-2 sm:text-base ring ring-transparent group md:px-4 hover:ring hover:ring-opacity-50 focus:ring-opacity-50 hover:ring-violet-600 text-gray-900 bg-gray-200 dark:bg-gray-400 dark:text-gray-200 "
-          href="https://tailwindflex.com/tag/carousel"
-        >
-          <span className="text-sm">High-paying</span>
-        </a>
-      </div>
-    
       <div className="flex flex-wrap">
   {authorList.map((author) => (
     <div key={author.id} className="py-16 flex flex-wrap">
@@ -123,7 +101,7 @@ const [authorList, setAuthorList] = useState([]);
             <p className="text-gray-500 text-sm mt-2">location : Toul Kork, Phnom Penh</p>
             <div className="flex items-center justify-between mt-4">
              
-              <button  className="bg-gray-900 text-white py-2 px-4 rounded-full font-bold hover:bg-gray-800"></button>
+            
             </div>
           </div>
         </div>
